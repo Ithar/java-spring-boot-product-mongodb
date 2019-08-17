@@ -1,9 +1,9 @@
-package guru.springframework.controllers;
+package com.ithar.malik.java.spring.application.controllers;
 
-import guru.springframework.commands.ProductForm;
-import guru.springframework.converters.ProductToProductForm;
-import guru.springframework.domain.Product;
-import guru.springframework.services.ProductService;
+import com.ithar.malik.java.spring.application.commands.ProductForm;
+import com.ithar.malik.java.spring.application.converters.ProductToProductForm;
+import com.ithar.malik.java.spring.application.domain.Product;
+import com.ithar.malik.java.spring.application.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

@@ -1,4 +1,4 @@
-package guru.springframework;
+package com.ithar.malik.java.spring.application;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

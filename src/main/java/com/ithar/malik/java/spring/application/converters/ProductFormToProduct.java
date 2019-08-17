@@ -1,7 +1,7 @@
-package guru.springframework.converters;
+package com.ithar.malik.java.spring.application.converters;
 
-import guru.springframework.commands.ProductForm;
-import guru.springframework.domain.Product;
+import com.ithar.malik.java.spring.application.commands.ProductForm;
+import com.ithar.malik.java.spring.application.domain.Product;
 import org.bson.types.ObjectId;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;

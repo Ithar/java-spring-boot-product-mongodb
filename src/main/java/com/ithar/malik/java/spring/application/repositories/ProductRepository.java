@@ -1,6 +1,6 @@
-package guru.springframework.repositories;
+package com.ithar.malik.java.spring.application.repositories;
 
-import guru.springframework.domain.Product;
+import com.ithar.malik.java.spring.application.domain.Product;
 import org.springframework.data.repository.CrudRepository;
 
 /**

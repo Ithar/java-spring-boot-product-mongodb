@@ -1,4 +1,4 @@
-package guru.springframework.domain;
+package com.ithar.malik.java.spring.application.domain;
 
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;

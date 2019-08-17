@@ -1,7 +1,7 @@
-package guru.springframework.services;
+package com.ithar.malik.java.spring.application.services;
 
-import guru.springframework.commands.ProductForm;
-import guru.springframework.domain.Product;
+import com.ithar.malik.java.spring.application.commands.ProductForm;
+import com.ithar.malik.java.spring.application.domain.Product;
 
 import java.util.List;
 
