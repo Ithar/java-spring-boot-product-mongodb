@@ -6,4 +6,8 @@ This repository contains a Spring Boot example project for MongoDB held on docke
 
 
 
+PowerShell 
+* docker run <CONTAINER_ID>
+* Run Application
+* http://localhost:8080/product/list
 
