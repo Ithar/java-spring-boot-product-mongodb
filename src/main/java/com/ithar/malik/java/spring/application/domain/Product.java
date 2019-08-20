@@ -1,16 +1,18 @@
 package com.ithar.malik.java.spring.application.domain;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.math.BigDecimal;
 
-/**
- * Created by jt on 1/10/17.
- */
+@Getter
+@Setter
 @Document
 public class Product {
+
     @Id
     private ObjectId _id;
     private String description;
@@ -23,29 +25,5 @@ public class Product {
 
     public void setId(ObjectId id) {
         this._id = id;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
-
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
     }
 }

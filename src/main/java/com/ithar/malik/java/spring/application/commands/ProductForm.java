@@ -1,12 +1,13 @@
 package com.ithar.malik.java.spring.application.commands;
 
-
 import java.math.BigDecimal;
+import lombok.Getter;
+import lombok.Setter;
 
-/**
- * Created by jt on 1/10/17.
- */
+@Getter
+@Setter
 public class ProductForm {
+
     private String id;
     private String description;
     private BigDecimal price;
