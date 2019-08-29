@@ -3,12 +3,10 @@
 
 This repository contains a Spring Boot example project for MongoDB held on docker.
 
-
- > docker run -p 27017:27017 -d mongo
-
-
-PowerShell 
-* docker run <CONTAINER_ID>
-* Run Application
+## Installation
+ > docker run -p 27017:27017 -v C:\dev\db\mongo\:\data\db -d mongo
+   
+## Application Run (Mongo DB) 
+* docker start 525c288a5b64 (quirky_black)
+* Run Application (IntelliJ)
 * http://localhost:8080/product/list
-
