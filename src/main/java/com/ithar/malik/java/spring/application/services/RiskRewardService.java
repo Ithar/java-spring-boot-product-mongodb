@@ -83,8 +83,9 @@ public class RiskRewardService {
         return res + commission;
     }
 
-    private double calculateRewardRatio(double risk , double reward) {
-        return 0;
+    double calculateRewardRatio(double risk , double reward) {
+        dfc.setRoundingMode(RoundingMode.DOWN);
+        return Double.parseDouble(dfc.format(reward/risk));
     }
 
     private int removeLastDecimalAndPrune(double number) {

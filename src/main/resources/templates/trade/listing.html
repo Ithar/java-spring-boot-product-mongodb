@@ -39,7 +39,7 @@
         <!-- Entry/Take/Stop Prices -->
         <div class="row mb-4">
             <div class="col">
-                <input th:field="*{entryPrice}" type="number" step="0.00001" class="form-control" placeholder="Entry Price">
+                <input th:field="*{entryPrice}" type="number" step="0.00001" class="form-control" placeholder="Entry Price" tooltip="Entry Price">
             </div>
             <div class="col">
                 <input th:field="*{takeProfitPrice}" type="number" step="0.00001" class="form-control" placeholder="Take Profit">
@@ -55,6 +55,11 @@
                 <button type="submit" class="btn btn-primary btn-sm">Create Trade</button>
             </div>
         </div>
+
+        <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+            <p>Cannot create a trade please check input values</p>
+        </div>
+
     </form>
 
     <hr/>
@@ -62,7 +67,7 @@
     <h2>Previous Trades</h2>
 
     <div>
-        <table class="table table-striped">
+        <table class="table table-striped text-center">
             <tr>
                 <th>Pair</th>
                 <th>Type</th>

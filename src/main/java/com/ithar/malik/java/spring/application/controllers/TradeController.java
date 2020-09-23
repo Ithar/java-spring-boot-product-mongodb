@@ -46,7 +46,7 @@ public class TradeController {
     @PostMapping(value = "/create")
     public String createOrUpdateTrade(@Valid Trade trade, BindingResult bindingResult){
 
-        if(bindingResult.hasErrors() || !tradeValidator.validate(trade)) {
+        if(bindingResult.hasErrors() || !tradeValidator.validate(trade, bindingResult)) {
             return "trade/listing";
         }
 
