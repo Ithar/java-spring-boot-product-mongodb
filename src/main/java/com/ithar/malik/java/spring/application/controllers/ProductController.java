@@ -33,7 +33,7 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @RequestMapping("/")
+    //@RequestMapping("/")
     public String redirToList(){
         return "redirect:/product/list";
     }

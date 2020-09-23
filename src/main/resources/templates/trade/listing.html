@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Trader - List</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+<div class="container mt-4">
+
+    <h2>Place Trade</h2>
+
+    <form th:object="${trade}" th:action="@{/create}" method="post">
+
+        <input type="hidden" th:field="*{_id}"/>
+
+        <!-- Trade type/ lot size -->
+        <div  class="row mb-2 mt-4">
+            <div class="col">
+                <select th:field="*{currencyPair}">
+                    <option value="GBP/USD">GBP/USD</option>
+                    <option value="USD/GBP">USD/GPB</option>
+                </select>
+            </div>
+            <div class="col">
+                <select th:field="*{buySell}">
+                    <option value="buy">Buy</option>
+                    <option value="sell">Sell</option>
+                </select>
+            </div>
+            <div class="col">
+                <input th:field="*{entryPrice}" type="number"  class="form-control"  placeholder="Lot">
+            </div>
+        </div>
+
+        <!-- Entry/Take/Stop Prices -->
+        <div class="row mb-4">
+            <div class="col">
+                <input th:field="*{entryPrice}" type="number" step="0.00001" class="form-control" placeholder="Entry Price">
+            </div>
+            <div class="col">
+                <input th:field="*{takeProfitPrice}" type="number" step="0.00001" class="form-control" placeholder="Take Profit">
+            </div>
+            <div class="col">
+                <input th:field="*{stopLossPrice}" type="number" step="0.00001" class="form-control" placeholder="Stop Loss">
+            </div>
+        </div>
+
+        <!-- Submit -->
+        <div class="row">
+            <div class="col">
+                <button type="submit" class="btn btn-primary btn-sm">Create Trade</button>
+            </div>
+        </div>
+    </form>
+
+    <hr/>
+
+    <h2>Previous Trades</h2>
+
+    <div>
+        <table class="table table-striped">
+            <tr>
+                <th>Trade</th>
+                <th>Buy/Sell</th>
+                <th>Entry</th>
+                <th>Take Profit</th>
+                <th>Stop Loss</th>
+                <th>Lot</th>
+                <th>PIP Risk</th>
+                <th>PIP Reward</th>
+                <th>Risk</th>
+                <th>Reward</th>
+                <th>Ratio</th>
+                <th>Actions</th>
+            </tr>
+            <tr th:each="trade : ${trades}">
+                <td th:text="${trade.currencyPair}"></td>
+                <td th:text="${trade.buySell}"></td>
+                <td th:text="${trade.entryPrice}"></td>
+                <td th:text="${trade.takeProfitPrice}"></td>
+                <td th:text="${trade.stopLossPrice}"></td>
+                <td th:text="${trade.lot}"></td>
+                <td th:text="${trade.pipRisk}"></td>
+                <td th:text="${trade.pipReward}"></td>
+                <td th:text="${trade.risk}"></td>
+                <td th:text="${trade.reward}"></td>
+                <td th:text="${trade.riskRewardRatio}"></td>
+                <td>
+                    <a th:href="${'/trade/edit/' + trade._id.toHexString()}">Edit</a>  |
+                    <a th:href="${'/trade/delete/' + trade._id.toHexString()}">Delete</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+</div>
+
+</body>
+</html>
