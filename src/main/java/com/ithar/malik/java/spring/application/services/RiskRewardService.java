@@ -1,21 +1,17 @@
 package com.ithar.malik.java.spring.application.services;
 
 import com.ithar.malik.java.spring.application.domain.Trade;
-import com.ithar.malik.java.spring.application.repositories.TradeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 public class RiskRewardService {
 
-    DecimalFormat df = new DecimalFormat(".0000");
-
-
+    private static final DecimalFormat df = new DecimalFormat(".0000");
+    private static final DecimalFormat dfc = new DecimalFormat("0.00");
 
     @Autowired
     public RiskRewardService() {
@@ -24,16 +20,25 @@ public class RiskRewardService {
 
     public void calculateRiskReward(Trade trade) {
 
-        double risk = calculateRisk(trade);
-        double reward = calculateReward(trade);
+        double commission = calculateCommission(trade);
+        int pipRisk = calculatePipRisk(trade);
+        int pipReward = calculatePipReward(trade);
+        double risk = calculateRisk(trade.getLot(), pipRisk, commission);
+        double reward = calculateReward(trade.getLot(), pipReward, commission);
+
         double ratio = calculateRewardRatio(risk, reward);
 
-        trade.setPipRisk(calculatePipRisk(trade));
-        trade.setPipReward(calculatePipReward(trade));
-
+        trade.setCommission(commission);
+        trade.setPipRisk(pipRisk);
+        trade.setPipReward(pipReward);
         trade.setRisk(risk);
         trade.setReward(reward);
         trade.setRiskRewardRatio(ratio);
+    }
+
+    double calculateCommission(Trade trade) {
+        dfc.setRoundingMode(RoundingMode.UP);
+        return Double.parseDouble(dfc.format(trade.getLot() * 5));
     }
 
     int calculatePipRisk(Trade trade) {
@@ -41,7 +46,7 @@ public class RiskRewardService {
         int entry = removeLastDecimalAndPrune(trade.getEntryPrice());
         int stopLoss = removeLastDecimalAndPrune(trade.getStopLossPrice());
 
-        if ("BUY".equals(trade.getBuySell().toUpperCase())) {
+        if ("BUY".equals(trade.getType().toUpperCase())) {
             return entry - stopLoss;
         } else {
             return stopLoss - entry;
@@ -53,19 +58,29 @@ public class RiskRewardService {
         int entry = removeLastDecimalAndPrune(trade.getEntryPrice());
         int profit = removeLastDecimalAndPrune(trade.getTakeProfitPrice());
 
-        if ("BUY".equals(trade.getBuySell().toUpperCase())) {
+        if ("BUY".equals(trade.getType().toUpperCase())) {
             return Math.abs(profit - entry);
         } else {
             return Math.abs(entry - profit);
         }
     }
 
-    private double calculateRisk(Trade trade) {
-        return 0;
+    double calculateRisk(double lot, int pipRisk, double commission) {
+        dfc.setRoundingMode(RoundingMode.DOWN);
+
+        double lotMultiple = lot * 10;
+        double res = Double.parseDouble(dfc.format((lotMultiple * pipRisk)));
+
+        return res + commission;
     }
 
-    private double calculateReward(Trade trade) {
-        return 0;
+    double calculateReward(double lot, int pipReward, double commission) {
+        dfc.setRoundingMode(RoundingMode.DOWN);
+
+        double lotMultiple = lot * 10;
+        double res = Double.parseDouble(dfc.format((lotMultiple * pipReward)));
+
+        return res + commission;
     }
 
     private double calculateRewardRatio(double risk , double reward) {

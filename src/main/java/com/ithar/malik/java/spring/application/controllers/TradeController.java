@@ -29,21 +29,17 @@ public class TradeController {
         this.tradeService = tradeService;
     }
 
-    @GetMapping("/")
-    public String redirToList(){
-        return "redirect:/trade/listing";
-    }
-
-    @GetMapping({"/trade"})
+    @GetMapping({"/", "/trade"})
     public String listProducts(Model model){
-        model.addAttribute("trades", tradeService.listAll());
         model.addAttribute("trade", new Trade());
+        model.addAttribute("trades", tradeService.listAll());
         return "trade/listing";
     }
 
     @GetMapping("/trade/edit/{id}")
     public String edit(@PathVariable String id, Model model){
         model.addAttribute("trade", tradeService.getById(id));
+        model.addAttribute("trades", tradeService.listAll());
         return "trade/listing";
     }
 
@@ -56,12 +52,12 @@ public class TradeController {
 
         tradeService.saveOrUpdate(trade);
 
-        return "redirect:/trade/listing";
+        return "redirect:/trade";
     }
 
     @GetMapping("/trade/delete/{id}")
     public String delete(@PathVariable String id){
         tradeService.delete(id);
-        return "redirect:trade/listing";
+        return "redirect:/trade";
     }
 }

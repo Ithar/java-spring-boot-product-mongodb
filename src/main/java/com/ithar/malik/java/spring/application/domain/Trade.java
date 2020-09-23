@@ -14,7 +14,7 @@ public class Trade {
 
     private String currencyPair;
 
-    private String buySell;
+    private String type;
 
     private Double entryPrice;
 
@@ -31,6 +31,8 @@ public class Trade {
     private Double risk;
 
     private Double reward;
+
+    private Double commission;
 
     private Double riskRewardRatio;
 }
