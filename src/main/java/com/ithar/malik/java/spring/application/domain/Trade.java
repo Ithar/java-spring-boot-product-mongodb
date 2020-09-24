@@ -6,13 +6,14 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 
 @Document
 @Data
 public class Trade {
 
     @Id
-    private ObjectId _id;
+    private ObjectId id;
 
     private String currencyPair;
 
@@ -41,4 +42,6 @@ public class Trade {
     private Double commission;
 
     private Double riskRewardRatio;
+
+    private LocalDateTime createdAt;
 }

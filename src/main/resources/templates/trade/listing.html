@@ -15,7 +15,7 @@
 
     <form th:object="${trade}" th:action="@{/create}" method="post">
 
-        <input type="hidden" th:field="*{_id}"/>
+        <input th:if="*{id}" th:field="*{id}" type="hidden"/>
 
         <!-- Trade type/ lot size -->
         <div  class="row mb-2 mt-4">
@@ -97,8 +97,8 @@
                 <td th:text="${trade.reward}" class="text-success"></td>
                 <td th:text="${trade.riskRewardRatio}"></td>
                 <td>
-                    <a th:href="${'/trade/edit/' + trade._id.toHexString()}">Edit</a>  |
-                    <a th:href="${'/trade/delete/' + trade._id.toHexString()}"><span class="fas fa-trash-alt"></span></a>
+                    <a th:href="${'/trade/edit/' + trade.id.toHexString()}">Edit</a>  |
+                    <a th:href="${'/trade/delete/' + trade.id.toHexString()}"><span class="fas fa-trash-alt"></span></a>
                 </td>
             </tr>
         </table>
