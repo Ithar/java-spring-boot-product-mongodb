@@ -1,29 +1,47 @@
-# java-spring-mongodb
+# java-spring-boot-hibernate-mysql
 
-This repository contains a Spring Boot example project for MongoDB held on docker.
+Project contains all the possible hibernate JPA entities relationships backed by MySQL database.
+
+#### Features
+- MySQL schema loader
+- @OneToOne
+- @OneToMany
+- @ManyToOne
+- @ManyToMany  
 
 ## Installation
- > docker run -p 27017:27017 -v C:\dev\db\mongo\:\data\db -d mongo
-   
+> docker run --name hibernate-mysql -v /Users/ithar.malik/dev/personal/java/java-spring-boot-hibernate-mysql/volume:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql:8.0.25
+
+> docker exec -it hibernate-mysql bash -l
+
+> mysql -uroot -p  
    
 ## Application Stack
 
-
 Stack  | version |
 --- | --- |  
-*Java* | 1.8 
-*SpringBoot* | 2.0.1 
-*DB* | MongoDB
-*Docker*  | MongoDB
-*Rendering* | Thymeleaf
+*Java* | 1.8
+*SpringBoot* |  2.1.0.RELEASE
+*Frontend* | n/a
+*DB* | my-sql:8.0.25 (docker)
+*Server* | n/a
 *Build Tool* | Maven
 *CI* | n/a
 *Code Coverage* | n/a
+*Build env* | docker run 
 
    
-   
-## Application Run (Mongo DB) 
-* docker start 525c288a5b64 (quirky_black)
-* Run Application (IntelliJ)
-* http://localhost:8080/product/list
+## Application Run (MySQL DB) 
+> docker start hibernate-mysql
 
+## Application Run 
+
+> Run Application src/main/java/com/ithar/malik/hibernate/main/XToY
+
+
+## Application GIT branches
+- master
+
+## Application profile
+
+## Further enhancements 
