@@ -4,7 +4,7 @@ import com.ithar.malik.java.spring.application.commands.ProductForm;
 import com.ithar.malik.java.spring.application.converters.ProductToProductForm;
 import com.ithar.malik.java.spring.application.domain.Product;
 import com.ithar.malik.java.spring.application.services.ProductService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,62 +14,75 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
 
-/**
- * Created by jt on 1/10/17.
- */
+@Slf4j
 @Controller
 public class ProductController {
-    private ProductService productService;
 
-    private ProductToProductForm productToProductForm;
+    private final static String PRODUCT_FORM_VIEW = "product/product-form";
+    private final static String PRODUCT_LIST_VIEW = "product/list";
+    private final static String PRODUCT_SHOW_VIEW = "product/show";
 
-    @Autowired
-    public void setProductToProductForm(ProductToProductForm productToProductForm) {
+    private final ProductService productService;
+    private final ProductToProductForm productToProductForm;
+
+    public ProductController(ProductService productService, ProductToProductForm productToProductForm) {
+        this.productService = productService;
         this.productToProductForm = productToProductForm;
     }
 
-    @Autowired
-    public void setProductService(ProductService productService) {
-        this.productService = productService;
-    }
+    @RequestMapping("/")
+    public String redirectToList() {
 
-    //@RequestMapping("/")
-    public String redirToList(){
         return "redirect:/product/list";
     }
 
     @RequestMapping({"/product/list", "/product"})
-    public String listProducts(Model model){
+    public String listProducts(Model model) {
+
+        log.info("Listing all products");
+
         model.addAttribute("products", productService.listAll());
-        return "product/list";
+        return PRODUCT_LIST_VIEW;
     }
 
     @RequestMapping("/product/show/{id}")
-    public String getProduct(@PathVariable String id, Model model){
+    public String getProduct(@PathVariable String id, Model model) {
+
+        log.info("Getting a product with id: {}", id);
+
         model.addAttribute("product", productService.getById(id));
-        return "product/show";
+
+        return PRODUCT_SHOW_VIEW;
     }
 
     @RequestMapping("product/edit/{id}")
-    public String edit(@PathVariable String id, Model model){
+    public String edit(@PathVariable String id, Model model) {
+
+        log.info("Edit a product with id: {}", id);
+
         Product product = productService.getById(id);
         ProductForm productForm = productToProductForm.convert(product);
 
         model.addAttribute("productForm", productForm);
-        return "product/productform";
+        return PRODUCT_FORM_VIEW;
     }
 
     @RequestMapping("/product/new")
-    public String newProduct(Model model){
+    public String newProduct(Model model) {
+
+        log.info("New product");
+
         model.addAttribute("productForm", new ProductForm());
-        return "product/productform";
+        return PRODUCT_FORM_VIEW;
     }
 
     @RequestMapping(value = "/product", method = RequestMethod.POST)
-    public String saveOrUpdateProduct(@Valid ProductForm productForm, BindingResult bindingResult){
+    public String saveOrUpdateProduct(@Valid ProductForm productForm, BindingResult bindingResult) {
 
-        if(bindingResult.hasErrors()){
-            return "product/productform";
+        log.info("Save or update a product");
+
+        if (bindingResult.hasErrors()) {
+            return PRODUCT_FORM_VIEW;
         }
 
         Product savedProduct = productService.saveOrUpdateProductForm(productForm);
@@ -78,7 +91,10 @@ public class ProductController {
     }
 
     @RequestMapping("/product/delete/{id}")
-    public String delete(@PathVariable String id){
+    public String delete(@PathVariable String id) {
+
+        log.info("Deleting a product with id: {}", id);
+
         productService.delete(id);
         return "redirect:/product/list";
     }
