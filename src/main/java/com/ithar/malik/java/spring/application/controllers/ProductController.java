@@ -32,6 +32,7 @@ public class ProductController {
 
     @RequestMapping("/")
     public String redirectToList() {
+
         return "redirect:/product/list";
     }
 

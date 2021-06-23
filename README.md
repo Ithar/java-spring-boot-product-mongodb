@@ -1,5 +1,4 @@
 # java-spring-mongodb
-#### August 2019 
 
 This repository contains a Spring Boot example project for MongoDB held on docker.
 
@@ -8,6 +7,7 @@ This repository contains a Spring Boot example project for MongoDB held on docke
    
    
 ## Application Stack
+
 
 Stack  | version |
 --- | --- |  
@@ -26,3 +26,4 @@ Stack  | version |
 * docker start 525c288a5b64 (quirky_black)
 * Run Application (IntelliJ)
 * http://localhost:8080/product/list
+
