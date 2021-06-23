@@ -11,12 +11,8 @@ public class MySqlConnectionTest {
         String pass = "my-secret-pw";
 
         try {
-            System.out.println("Connecting to database: " + jdbcUrl);
-
             DriverManager.getConnection(jdbcUrl, user, pass);
-
             System.out.println("Connection successful!!!");
-
         } catch (Exception e) {
             e.printStackTrace();
         }

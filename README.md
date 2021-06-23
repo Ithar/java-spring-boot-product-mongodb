@@ -3,11 +3,12 @@
 Project contains all the possible hibernate JPA entities relationships backed by MySQL database.
 
 #### Features
-- MySQL schema loader
+- MySQL schema 
 - @OneToOne
 - @OneToMany
 - @ManyToOne
 - @ManyToMany  
+- Lombok
 
 ## Installation
 > docker run -p3306:3306 --name hibernate-mysql -v /Users/ithar.malik/dev/personal/java/java-spring-boot-hibernate-mysql/volume:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql:8.0.25
@@ -44,4 +45,8 @@ Stack  | version |
 
 ## Application profile
 
-## Further enhancements 
+## Further enhancements
+
+
+## Good reads
+- https://thorben-janssen.com/jpa-generate-primary-keys/
