@@ -10,11 +10,11 @@ Project contains all the possible hibernate JPA entities relationships backed by
 - @ManyToMany  
 
 ## Installation
-> docker run --name hibernate-mysql -v /Users/ithar.malik/dev/personal/java/java-spring-boot-hibernate-mysql/volume:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql:8.0.25
+> docker run -p3306:3306 --name hibernate-mysql -v /Users/ithar.malik/dev/personal/java/java-spring-boot-hibernate-mysql/volume:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql:8.0.25
 
 > docker exec -it hibernate-mysql bash -l
 
-> mysql -uroot -p  
+> mysql -uroot -pmy-secret-pw  
    
 ## Application Stack
 

@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SpringBootMongodbApplication {
+public class SpringBootHibernateApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpringBootMongodbApplication.class, args);
+		SpringApplication.run(SpringBootHibernateApplication.class, args);
 	}
 }
