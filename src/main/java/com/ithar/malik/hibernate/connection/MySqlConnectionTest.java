@@ -12,7 +12,9 @@ public class MySqlConnectionTest {
 
         try {
             DriverManager.getConnection(jdbcUrl, user, pass);
-            System.out.println("Connection successful!!!");
+            System.out.println("\n-------------------------");
+            System.out.println("CONNECTED SUCCESSFULLY !!!");
+            System.out.println("-------------------------\n");
         } catch (Exception e) {
             e.printStackTrace();
         }

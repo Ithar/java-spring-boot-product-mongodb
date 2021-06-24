@@ -8,8 +8,8 @@ import javax.persistence.*;
 @Getter
 @Setter
 
-@Table(name = "instructor_details")
-public class InstructorDetails {
+@Entity
+public class InstructorDetail {
 
     @Id
     //@GeneratedValue(strategy= GenerationType.AUTO) // default
