@@ -1,4 +1,4 @@
-package com.ithar.malik.hibernate.main;
+package com.ithar.malik.hibernate.connection;
 
 import java.sql.DriverManager;
 
