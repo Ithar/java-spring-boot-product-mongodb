@@ -9,10 +9,12 @@ import javax.persistence.*;
 @Setter
 
 @Entity
+@Table(name="instructor_detail")
 public class InstructorDetail {
 
     @Id
     //@GeneratedValue(strategy= GenerationType.AUTO) // default
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
 
     @Column(name = "bio")
