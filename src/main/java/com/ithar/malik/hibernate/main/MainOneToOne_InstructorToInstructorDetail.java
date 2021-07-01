@@ -6,7 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-public class MainOneToOne {
+public class MainOneToOne_InstructorToInstructorDetail {
 
     private static final SessionFactory SESSION_FACTORY = new Configuration()
             .configure("hibernate.cfg.xml")
