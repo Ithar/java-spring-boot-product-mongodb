@@ -39,14 +39,19 @@ public class Instructor {
     private List<Course> courses;
 
     // A convenience methods for bi-directional relationship
-    public void addCourse(Course course) {
+    public void addCourses(List<Course> newCourses) {
 
         if (courses == null) {
             courses = new ArrayList<>();
         }
 
-        courses.add(course);
-        course.setInstructor(this);
+        List<Course> allCourses = new ArrayList<>();
+        allCourses.addAll(courses);
+        allCourses.addAll(newCourses);
+
+        for(Course course : allCourses) {
+            course.setInstructor(this);
+        }
     }
 
 }

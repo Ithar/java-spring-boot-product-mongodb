@@ -50,3 +50,15 @@ Stack  | version |
 
 ## Good reads
 - https://thorben-janssen.com/jpa-generate-primary-keys/
+- https://ankitkamboj18.medium.com/a-guide-to-jpa-with-hibernate-relationship-mappings-onetoone-onetomany-manytoone-310ce31df3f6
+
+## Notes
+
+A relationship may be optional or mandatory. Considering the `@OneToMany` side — 
+it is always optional, and we can’t do anything about it. 
+The `@ManyToOne` side, on the other hand, offers us the option of making it mandatory.
+
+The annotation `@JoinColumn` indicates that this entity is the owner of the relationship 
+(that is: the corresponding table has a column with a foreign key to the referenced table), 
+whereas the attribute `mappedBy` indicates that the entity in this side is the inverse of the relationship, 
+and the owner resides in the "other" entity.

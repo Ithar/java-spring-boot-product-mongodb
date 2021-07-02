@@ -7,12 +7,10 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-import java.util.ArrayList;
-import java.util.List;
+public class MainManyToOne_CoursesToInstructor {
 
-public class MainOneToMany_InstructorToCourses {
-
-    private static final String INSTRUCTOR_NAME = "Jean-Paul";
+    private static final String INSTRUCTOR1_NAME = "Confucius";
+    private static final String INSTRUCTOR2_NAME = "Voltaire";
 
     private static final SessionFactory SESSION_FACTORY = new Configuration()
             .configure("hibernate.cfg.xml")
@@ -23,10 +21,9 @@ public class MainOneToMany_InstructorToCourses {
 
     public static void main(String[] args) {
         try {
-            // createInstructor(SESSION_FACTORY.getCurrentSession());
-             saveInstructorToCourses(SESSION_FACTORY.getCurrentSession());
-            // deleteCourse(SESSION_FACTORY.getCurrentSession());
-            // deleteInstructor(SESSION_FACTORY.getCurrentSession());
+             //createInstructor(SESSION_FACTORY.getCurrentSession());
+             //saveCoursesToInstructor(SESSION_FACTORY.getCurrentSession());
+            deleteCourse(SESSION_FACTORY.getCurrentSession());
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -36,59 +33,21 @@ public class MainOneToMany_InstructorToCourses {
 
     private static void createInstructor(Session session) {
 
-        Instructor instructor = new Instructor();
-        instructor.setFirstName(INSTRUCTOR_NAME);
-        instructor.setLastName("Sartre");
-        instructor.setEmail("jeanpaul.sartre@philosophers.com");
+        Instructor instructor1 = new Instructor();
+        instructor1.setFirstName(INSTRUCTOR1_NAME);
+        instructor1.setLastName("");
+        instructor1.setEmail("confucius@philosophers.com");
+
+        Instructor instructor2 = new Instructor();
+        instructor2.setFirstName(INSTRUCTOR2_NAME);
+        instructor2.setLastName("");
+        instructor2.setEmail("voltaire@philosophers.com");
 
         // Start hibernate transaction
         session.beginTransaction();
 
-        session.save(instructor);
-
-        // Commit hibernate transaction
-        session.getTransaction().commit();
-    }
-
-    // NOTE: Cannot delete an instructor that is linked to a course
-    private static void deleteInstructor(Session session) {
-
-        // Start hibernate transaction
-        session.beginTransaction();
-
-        Instructor instructor = getInstructorByFirstname(session, INSTRUCTOR_NAME);
-
-        session.delete(instructor);
-
-        // Commit hibernate transaction
-        session.getTransaction().commit();
-    }
-
-    private static void saveInstructorToCourses(Session session) {
-
-        Course course1 = new Course();
-        course1.setTitle("Perl 1.1");
-
-        Course course2 = new Course();
-        course2.setTitle("Perl Structs");
-
-        Course course3 = new Course();
-        course3.setTitle("Perl Spring");
-
-        List<Course> courses = new ArrayList<>();
-        courses.add(course1);
-        courses.add(course2);
-        courses.add(course3);
-
-        // Start hibernate transaction
-        session.beginTransaction();
-
-        Instructor instructor = getInstructorByFirstname(session, INSTRUCTOR_NAME);
-        instructor.addCourses(courses);
-
-        session.save(course1);
-        session.save(course2);
-        session.save(course3);
+        session.save(instructor1);
+        session.save(instructor2);
 
         // Commit hibernate transaction
         session.getTransaction().commit();
@@ -99,7 +58,7 @@ public class MainOneToMany_InstructorToCourses {
         // Start hibernate transaction
         session.beginTransaction();
 
-        Course course = getCourseByTitle(session, "Java 1.1");
+        Course course = getCourseByTitle(session, "C# in Action");
 
         session.delete(course);
 
@@ -107,6 +66,29 @@ public class MainOneToMany_InstructorToCourses {
         session.getTransaction().commit();
     }
 
+    private static void saveCoursesToInstructor(Session session) {
+
+        Course course1 = new Course();
+        course1.setTitle("C# 1.1");
+
+        Course course2 = new Course();
+        course2.setTitle("C# in Action");
+
+        // Start hibernate transaction
+        session.beginTransaction();
+
+        Instructor instructor1 = getInstructorByFirstname(session, INSTRUCTOR1_NAME);
+        Instructor instructor2 = getInstructorByFirstname(session, INSTRUCTOR2_NAME);
+
+        course1.setInstructor(instructor1);
+        course2.setInstructor(instructor2);
+
+        session.save(course1);
+        session.save(course2);
+
+        // Commit hibernate transaction
+        session.getTransaction().commit();
+    }
 
     private static Instructor getInstructorByFirstname(Session session, String firstName) {
         return session
