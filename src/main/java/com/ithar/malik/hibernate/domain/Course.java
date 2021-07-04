@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -23,5 +25,19 @@ public class Course {
                     CascadeType.REFRESH})
     @JoinColumn(name="instructor_id")
     private Instructor instructor;
+
+    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
+    private List<Review> reviews;
+
+    public void addReview(Review review) {
+
+        if (reviews == null) {
+            reviews = new ArrayList<>();
+        }
+
+        review.setCourse(this);
+        reviews.add(review);
+
+    }
 
 }
