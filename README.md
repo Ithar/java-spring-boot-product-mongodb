@@ -3,11 +3,13 @@
 Project contains all the possible hibernate JPA entities relationships backed by MySQL database.
 
 #### Features
-- MySQL schema 
+- MySQL schema sql script
+- Hibernate  
 - @OneToOne
 - @OneToMany
 - @ManyToOne
-- @ManyToMany  
+- @ManyToMany
+- Docker (MySql volume)  
 - Lombok
 
 ## Installation
